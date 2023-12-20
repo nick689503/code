@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// 定義二叉樹的結點
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// 創建一個新的二叉樹節點
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// 中序遍歷二叉樹
+void inorderTraversal(struct Node* root) {
+    if (root != NULL) {
+        // 先遞歸遍歷左子樹
+        inorderTraversal(root->left);
+        // 印出當前節點的數值
+        printf("%d ", root->data);
+        // 遞歸遍歷右子樹
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    // 創建一個簡單的二叉樹
+    struct Node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+
+    // 印出中序遍歷的結果
+    printf("Inorder Traversal: ");
+    inorderTraversal(root);
+
+    return 0;
+}
